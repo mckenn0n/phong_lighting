@@ -11,15 +11,10 @@ void main (void){
    vec4 ambC = vec4(0.0, 0.0, 1.0, 1.0);
    vec4 diffC = vec4(1.0, 1.0, 1.0, 1.0);
    vec4 specC = vec4(1.0, 0.0, 0.0, 1.0); 
-
    vec4 amb = Ka * ambC;
-
-
    vec4 diff = Kd * diffC * max(dot(LightDir,norm), 0.0);
    diff = clamp(diff, 0.0, 1.0);
-   
    vec4 spec = Ks * specC * pow(max(dot(H,norm),0.0),N);
    spec = clamp(spec, 0.0, 1.0);
- 
-   gl_FragColor = gl_FrontLightModelProduct.sceneColor + amb + diff + spec;
+   gl_FragColor = amb + diff + spec;
 }
