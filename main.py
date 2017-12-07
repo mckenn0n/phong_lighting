@@ -12,34 +12,28 @@ test = p(sys.argv[1])
 test.parse()
 vl = test.vert_list
 fl = test.face_list
+vert_name = str(input('Enter name of vertex shader: '))
+frag_name = str(input('Enter name of fragment shader: '))
 class GLContext():
 	def __init__(self, screen):
 		self.rot_x = 0
 		self.rot_y = 0
 		self.lines = False
 		self.pause = False
-		glEnable(GL_LIGHTING)
-		glEnable(GL_LIGHT0)
-		mat_specular = [ 1.0, 0.0, 0.0, 1.0 ] 
-		mat_diffuse =[ 1.0,	1.0,1.0,1.0 ] 
-		mat_ambient= [ 0.0,	0.0, 1.0, 1.0 ]
-		mat_shininess = [ 0.5 ]
-		vs_source=open("vert.glsl", "r")
+		# glEnable(GL_LIGHTING)
+		# glEnable(GL_LIGHT0)
+		vs_source=open('shaders/'+vert_name, "r")
 		vs_source=vs_source.read()
 		VERTEX_SHADER=shaders.compileShader(vs_source, GL_VERTEX_SHADER)										    
 
-		fs_source=open("frag.glsl", "r")
+		fs_source=open('shaders/'+frag_name, "r")
 		fs_source=fs_source.read()
 		FRAGMENT_SHADER=shaders.compileShader(fs_source,GL_FRAGMENT_SHADER)
 
 		self.shader=shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
 
-		glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
-		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular)
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse)
-		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient)
-		glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess)
-
+		# glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
+		shaders.glUseProgram(self.shader)
 		glEnable(GL_DEPTH_TEST)
 		glDepthFunc(GL_LEQUAL)
 		light_position = [ 0.0, -1.0, 1.0, 1.0 ]
@@ -89,11 +83,11 @@ class GLContext():
 		glRotatef(self.rot_x, 1, 0, 0)  
 		glRotatef(self.rot_y, 0, 1, 0) 
 		glRotatef(0.0, 0, 0, 1) 
-		glEnable(GL_LIGHTING)
+		# glEnable(GL_LIGHTING)
 		glBegin(GL_TRIANGLES)
 		
 		glColor3f(1.0, 0.0, 1.0)
-		# shaders.glUseProgram(self.shader)
+		
 		for x in range(len(fl)): #x starts at 0
 			glNormal3f(vl[fl[x][1]][3], vl[fl[x][1]][4], vl[fl[x][1]][5])
 			glVertex3f(vl[fl[x][1]][0], vl[fl[x][1]][1], vl[fl[x][1]][2])
