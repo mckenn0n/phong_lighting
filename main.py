@@ -79,7 +79,7 @@ class GLContext():
 	def display(self):
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 		glPushMatrix()
-		glTranslatef(0.0, -1.0, -5.0) 
+		glTranslatef(0.0, -.5, -3.0) 
 		glRotatef(self.rot_x, 1, 0, 0)  
 		glRotatef(self.rot_y, 0, 1, 0) 
 		glRotatef(0.0, 0, 0, 1) 
