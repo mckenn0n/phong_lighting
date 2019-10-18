@@ -8,6 +8,11 @@ Downlaod and install the patch from https://github.com/mckenn0n/OpenGLContext_py
 
 ---How to run---
 
+### Requires
+* Parse
+* OpenGL
+* pygame
+
 Run (cow):
 
 	python3 main.py model0.ply
